@@ -3,10 +3,13 @@
  ["source/cljs"]
 
  :dependencies
- []
+ [[reagent "0.8.1"]]
 
  :builds
  {:app {:target :browser
         :output-dir ".tmp/javascripts"
         :asset-path "/javascripts"
-        :modules {:site {:entries [bmi.core]}}}}}
+        :modules {:site {:entries [bmi.core]}}
+        :devtools {:repl-init-ns bmi.core
+                   :before-load bmi.core/stop
+                   :after-load bmi.core/start}}}}
