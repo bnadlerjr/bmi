@@ -9,20 +9,21 @@
   []
   (let [state (reagent/atom {:height 180 :weight 80})]
     (fn []
+      (let [{:keys [height weight]} @state]
       [:div
        [:h1 "BMI Calculator"]
-       [:div "Height: " (:height @state) "cm"
+       [:div "Height: " height "cm"
         [:input {:type "range"
-                 :value (:height @state)
+                 :value height
                  :min 100
                  :max 220
                  :on-change (partial update-state state :height)}]]
-       [:div "Weight: " (:weight @state) "kg"
+       [:div "Weight: " weight "kg"
         [:input {:type "range"
-                 :value (:weight @state)
+                 :value weight
                  :min 30
                  :max 150
-                 :on-change (partial update-state state :weight)}]]])))
+                 :on-change (partial update-state state :weight)}]]]))))
 
 (defn start
   []
