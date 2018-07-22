@@ -1,6 +1,10 @@
 (ns bmi.core
   (:require [reagent.core :as reagent]))
 
+(defn update-state
+  [state param event]
+  (swap! state assoc param (.-target.value event)))
+
 (defn bmi-component
   []
   (let [state (reagent/atom {:height 180 :weight 80})]
@@ -12,15 +16,13 @@
                  :value (:height @state)
                  :min 100
                  :max 220
-                 :on-change (fn [e]
-                              (swap! state assoc :height (.-target.value e)))}]]
+                 :on-change (partial update-state state :height)}]]
        [:div "Weight: " (:weight @state) "kg"
         [:input {:type "range"
                  :value (:weight @state)
                  :min 30
                  :max 150
-                 :on-change (fn [e]
-                              (swap! state assoc :weight (.-target.value e)))}]]])))
+                 :on-change (partial update-state state :weight)}]]])))
 
 (defn start
   []
