@@ -1,0 +1,12 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["source/cljs"]
+
+ :dependencies
+ []
+
+ :builds
+ {:app {:target :browser
+        :output-dir ".tmp/javascripts"
+        :asset-path "/javascripts"
+        :modules {:site {:entries [bmi.core]}}}}}
