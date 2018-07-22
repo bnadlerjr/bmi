@@ -1,6 +1,11 @@
 (ns bmi.core
   (:require [reagent.core :as reagent]))
 
+(defn calculate-bmi
+  [height-cm weight-kg]
+  (let [height-m (/ height-cm 100)]
+    (/ weight-kg (* height-m height-m))))
+
 (defn update-state
   [state param event]
   (swap! state assoc param (.-target.value event)))
@@ -23,7 +28,8 @@
                  :value weight
                  :min 30
                  :max 150
-                 :on-change (partial update-state state :weight)}]]]))))
+                 :on-change (partial update-state state :weight)}]]
+       [:div "BMI: " (int (calculate-bmi height weight))]]))))
 
 (defn start
   []
